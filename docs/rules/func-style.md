@@ -22,7 +22,7 @@ This rule has either a string option:
 
 This rule has an object option for an exception:
 
-- `"topLevelStyle"` arrow | declaration | expression (default: `declaration`) enforces function style in top-level context.
+- `"topLevelStyle"` `arrow | declaration | expression` enforces function style in top-level context.
 - `"allowExportDefaultFunctionDeclaration"` true (default: `false`) Allow declarations for the default export even if you are configuring an `arrow` or `expression`.
 
 ## Implementation
