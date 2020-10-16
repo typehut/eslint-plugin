@@ -1,0 +1,52 @@
+{
+  "name": "@croutonn/eslint-plugin",
+  "version": "0.0.1",
+  "description": "This is a plugin that puts the ESLint rules I have wanted into one place.",
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "add-rule": "node scripts/add-rule",
+    "lint": "eslint lib scripts tests",
+    "update": "node scripts/update",
+    "pretest": "npm run -s lint",
+    "test": "nyc mocha \"tests/lib/**/*.js\" --reporter progress",
+    "version": "npm run -s update"
+  },
+  "peerDependencies": {
+    "eslint": ">=7.11.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.12.2",
+    "eslint": "^7.10.0",
+    "eslint-config-eslint": "^6.0.0",
+    "eslint-plugin-eslint-plugin": "^2.3.0",
+    "eslint-plugin-jsdoc": "^30.6.5",
+    "eslint-plugin-node": "^11.1.0",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/croutonn/eslint-plugin.git"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "@croutonn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/croutonn/eslint-plugin/issues"
+  },
+  "homepage": "https://github.com/croutonn/eslint-plugin#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
