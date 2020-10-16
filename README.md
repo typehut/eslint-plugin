@@ -46,12 +46,11 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 ## Rules
 
 <!--RULE_TABLE_BEGIN-->
-
 ### Stylistic Issues
 
-| Rule ID                                            | Description                                                                               |     |
-| :------------------------------------------------- | :---------------------------------------------------------------------------------------- | :-: |
-| [@croutonn/func-style](./docs/rules/func-style.md) | enforce consistent use of `function` declarations or expressions at the top-level context | ⭐️ |
+| Rule ID | Description |    |
+|:--------|:------------|:--:|
+| [@croutonn/func-style](./docs/rules/func-style.md) | enforce consistent use of `function` declarations or expressions | ⭐️ |
 
 <!--RULE_TABLE_END-->
 

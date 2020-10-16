@@ -1,4 +1,6 @@
 # @croutonn/func-style
+> enforce consistent use of `function` declarations or expressions
+> - ⭐️ This rule is included in `plugin:@croutonn/recommended` preset.
 
 > enforce consistent use of `function` declarations or expressions at the top-level context.
 >
