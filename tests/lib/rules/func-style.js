@@ -45,52 +45,58 @@ new RuleTester({ parser: require.resolve("@typescript-eslint/parser"), parserOpt
     ],
     invalid: [
         {
-            code: "const foo = (bar: Bar, h=null) => {};",
-            output: "function foo(bar: Bar, h=null){};",
+            code: "const foo = (bar: Bar, h=null) => {}",
+            output: "function foo(bar: Bar, h=null) {}",
             options: ["declaration"],
             errors: [{ message: messages["declaration-in-top-level"] }]
         },
         {
-            code: "const foo = () => {};",
-            output: "function foo(){};",
+            code: "const foo = () => {}",
+            output: "function foo() {}",
             options: ["declaration"],
             errors: [{ message: messages["declaration-in-top-level"] }]
         },
         {
             code: "function foo() {}",
-            output: "var foo = function(){}",
+            output: "var foo = function() {}",
             options: ["expression"],
             errors: [{ message: messages["expression-in-top-level"] }]
         },
         {
-            code: "const foo = function(){};",
-            output: "function foo(){};",
+            code: "const foo = function(){}",
+            output: "function foo() {}",
             options: ["declaration"],
             errors: [{ message: messages["declaration-in-top-level"] }]
         },
         {
-            code: "function foo() {const bar = function(){};}",
-            output: "function foo() {const bar = () =>{};}",
+            code: "function foo() {const bar = function(){}}",
+            output: "function foo() {const bar = () => {}}",
             options: ["arrow", { topLevelStyle: "declaration" }],
             errors: [{ message: messages.arrow }]
         },
         {
-            code: "function foo() {const bar = () => {};}",
-            output: "function foo() {const bar = function(){};}",
+            code: "function foo() {const bar = () => {}}",
+            output: "function foo() {const bar = function() {}}",
             options: ["expression", { topLevelStyle: "declaration" }],
             errors: [{ message: messages.expression }]
         },
         {
-            code: "function foo() {const bar = () => {};}",
-            output: "function foo() {function bar(){};}",
+            code: "function foo() {const bar = () => {}}",
+            output: "function foo() {function bar() {}}",
             options: ["declaration"],
             errors: [{ message: messages.declaration }]
         },
         {
-            code: "async function foo() {const bar = function(){};}",
-            output: "var foo = async () =>{const bar = () =>{};}",
+            code: "async function foo() {const bar = function(){}}",
+            output: "var foo = async () => {const bar = () => {}}",
             options: ["arrow"],
             errors: [{ message: messages["arrow-in-top-level"] }, { message: messages.arrow }]
+        },
+        {
+            code: "const foo = () => 1",
+            output: "function foo() {return 1}",
+            options: ["declaration"],
+            errors: [{ message: messages["declaration-in-top-level"] }]
         }
     ]
 });
