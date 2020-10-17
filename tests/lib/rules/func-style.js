@@ -87,8 +87,8 @@ new RuleTester({ parser: require.resolve("@typescript-eslint/parser"), parserOpt
             errors: [{ message: messages.declaration }]
         },
         {
-            code: "function foo() {const bar = function(){};}",
-            output: "var foo = () =>{const bar = () =>{};}",
+            code: "async function foo() {const bar = function(){};}",
+            output: "var foo = async () =>{const bar = () =>{};}",
             options: ["arrow"],
             errors: [{ message: messages["arrow-in-top-level"] }, { message: messages.arrow }]
         }
