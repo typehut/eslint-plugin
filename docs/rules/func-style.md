@@ -4,6 +4,10 @@
 >
 > - ⭐️ This rule is included in `plugin:@croutonn/recommended` preset.
 
+> enforce consistent use of `function` declarations or expressions at the top-level context.
+>
+> - ⭐️ This rule is included in `plugin:@croutonn/recommended` preset.
+
 The built-in func-style rule do not enforce arrow function expressions. It is also impossible to force a different style only in the top-level context.
 
 This rule can have three styles of arrow, declaration, and expression in the top-level and below context!
