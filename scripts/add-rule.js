@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const pkg = require("../package.json");
 const { pluginId } = require("./lib/plugin-id");
 const ruleId = process.argv[2];
 
@@ -15,6 +16,7 @@ if (!ruleId) {
 const docPath = path.resolve(__dirname, "../docs/rules", `${ruleId}.md`);
 const rulePath = path.resolve(__dirname, "../lib/rules", `${ruleId}.js`);
 const testPath = path.resolve(__dirname, "../tests/lib/rules", `${ruleId}.js`);
+const docUrl = `${pkg.homepage.split("#")[0]}/blob/main/docs/rules/${ruleId}.md`;
 
 // Overwrite check.
 for (const filePath of [docPath, rulePath, testPath]) {
@@ -54,7 +56,7 @@ module.exports = {
             category: "Stylistic Issues",
 
             recommended: false,
-            url: ""
+            url: "${docUrl}"
         },
 
         fixable: null,
