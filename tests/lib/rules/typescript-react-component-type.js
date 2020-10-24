@@ -19,11 +19,19 @@ new RuleTester({
         "const App = ()=> null;",
         {
             code: "const App: React.FC = ()=> null;",
-            options: ["FC"]
+            options: ["omit"]
         },
         {
             code: "const App: React.FunctionComponent = ()=> null;",
-            options: ["FunctionComponent"]
+            options: ["raw"]
+        },
+        {
+            code: "const App: React.VFC = ()=> null;",
+            options: ["omit"]
+        },
+        {
+            code: "const App: React.VoidFunctionComponent = ()=> null;",
+            options: ["raw"]
         }
     ],
     invalid: [
@@ -39,7 +47,7 @@ new RuleTester({
         },
         {
             code: "const App: React.FC = ()=> null;",
-            options: ["FunctionComponent"],
+            options: ["raw"],
             errors: [
                 {
                     messageId: "enforceFunctionComponent",
@@ -49,10 +57,32 @@ new RuleTester({
             ]
         },
         {
-            code: "const App: React.SFC = ()=> null;",
+            code: "const App: React.VoidFunctionComponent = ()=> null;",
             errors: [
                 {
-                    messageId: "enforceFC",
+                    messageId: "enforceVFC",
+                    line: 1,
+                    column: 12
+                }
+            ]
+        },
+        {
+            code: "const App: React.VFC = ()=> null;",
+            options: ["raw"],
+            errors: [
+                {
+                    messageId: "enforceVoidFunctionComponent",
+                    line: 1,
+                    column: 12
+                }
+            ]
+        },
+        {
+            code: "const App: React.SFC = ()=> null;",
+            options: ["raw"],
+            errors: [
+                {
+                    messageId: "enforceFunctionComponent",
                     line: 1,
                     column: 12
                 }
