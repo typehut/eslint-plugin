@@ -8,13 +8,14 @@ You can also enforce `React.FunctionComponent` if "Do not omit" is recommended a
 ## Rule Details
 
 This rule enforces the React component type to either `React.FC` or `React.FunctionComponent`.
+(Similarly, enforce rules on `VFC` and `VoidFunctionComponent`.)
 
 ## Options
 
 This rule has either a string option:
 
-- `"FC"` (default) enforces consistent use of `React.FC`
-- `"FunctionComponent"` enforces consistent use of `React.FunctionComponent`
+- `"omit"` (default) enforces consistent use of `React.FC` and `React.VFC`
+- `"raw"` enforces consistent use of `React.FunctionComponent` and `React.VoidFunctionComponent`
 
 ## Implementation
 
