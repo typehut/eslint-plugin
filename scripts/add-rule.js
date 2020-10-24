@@ -44,6 +44,9 @@ fs.writeFileSync(docPath, `# ${pluginId}/${ruleId}
 
 fs.writeFileSync(rulePath, `"use strict";
 
+/**
+ * @type import('eslint').Rule.RuleModule
+ */
 module.exports = {
     meta: {
         docs: {
