@@ -1,12 +1,9 @@
 # @croutonn/eslint-plugin
 
-<!--
 [![npm version](https://img.shields.io/npm/v/@croutonn/eslint-plugin.svg)](https://www.npmjs.com/package/@croutonn/eslint-plugin)
 [![Downloads/month](https://img.shields.io/npm/dm/@croutonn/eslint-plugin.svg)](http://www.npmtrends.com/@croutonn/eslint-plugin)
 [![Build Status](https://travis-ci.org/croutonn/eslint-plugin.svg?branch=main)](https://travis-ci.org/croutonn/eslint-plugin)
-[![Coverage Status](https://codecov.io/gh/croutonn/eslint-plugin/branch/main/graph/badge.svg)](https://codecov.io/gh/croutonn/eslint-plugin)
 [![Dependency Status](https://david-dm.org/croutonn/eslint-plugin.svg)](https://david-dm.org/croutonn/eslint-plugin)
--->
 
 This is a plugin that puts the ESLint rules I have wanted into one place.
 
