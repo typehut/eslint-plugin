@@ -84,7 +84,17 @@ fs.writeFileSync(testPath, `"use strict";
 const { RuleTester } = require("eslint");
 const rule = require("../../../lib/rules/${ruleId}");
 
-new RuleTester().run("${ruleId}", rule, {
+new RuleTester({
+    parser: require.resolve("@typescript-eslint/parser"),
+    parserOptions: {
+        ecmaVersion: 2015,
+        ecmaFeatures: {
+            jsx: true
+        },
+        lib: ["dom", "dom.iterable", "esnext"],
+        sourceType: "module"
+    }
+}).run("${ruleId}", rule, {
     valid: [],
     invalid: []
 });
