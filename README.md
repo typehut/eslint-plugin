@@ -46,6 +46,12 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 ## Rules
 
 <!--RULE_TABLE_BEGIN-->
+### Best Practices
+
+| Rule ID | Description |    |
+|:--------|:------------|:--:|
+| [@croutonn/typescript-react-require-props-suffix](./docs/rules/typescript-react-require-props-suffix.md) | require that prop interface names be suffixed with `Props` | ⭐️ |
+
 ### Stylistic Issues
 
 | Rule ID | Description |    |
