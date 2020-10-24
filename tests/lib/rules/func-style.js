@@ -4,7 +4,17 @@ const { RuleTester } = require("eslint");
 const rule = require("../../../lib/rules/func-style");
 const { messages } = rule.meta;
 
-new RuleTester({ parser: require.resolve("@typescript-eslint/parser"), parserOptions: { ecmaVersion: 2015, sourceType: "module" } }).run("func-style", rule, {
+new RuleTester({
+    parser: require.resolve("@typescript-eslint/parser"),
+    parserOptions: {
+        ecmaVersion: 2015,
+        ecmaFeatures: {
+            jsx: true
+        },
+        lib: ["dom", "dom.iterable", "esnext"],
+        sourceType: "module"
+    }
+}).run("func-style", rule, {
     valid: [
         {
             code: "function foo() {}",
