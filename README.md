@@ -50,6 +50,7 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 | Rule ID | Description |    |
 |:--------|:------------|:--:|
+| [@croutonn/typescript-react-component-type](./docs/rules/typescript-react-component-type.md) | enforce `FC` and `FunctionComponent` types to one or the other | ⭐️ |
 | [@croutonn/typescript-react-require-props-suffix](./docs/rules/typescript-react-require-props-suffix.md) | require that prop interface names be suffixed with `Props` | ⭐️ |
 
 ### Stylistic Issues
