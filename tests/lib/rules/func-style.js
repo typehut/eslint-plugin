@@ -73,7 +73,7 @@ new RuleTester({
         },
         {
             code: "function foo() {}",
-            output: "var foo = function() {}",
+            output: "const foo = function() {}",
             options: ["expression"],
             errors: [{ message: messages["expression-in-top-level"] }]
         },
@@ -103,7 +103,7 @@ new RuleTester({
         },
         {
             code: "async function foo() {const bar = function(){}}",
-            output: "var foo = async () => {const bar = () => {}}",
+            output: "const foo = async () => {const bar = () => {}}",
             options: ["arrow"],
             errors: [{ message: messages["arrow-in-top-level"] }, { message: messages.arrow }]
         },
@@ -115,25 +115,25 @@ new RuleTester({
         },
         {
             code: "function foo<T>(bar:T): void {}",
-            output: "var foo = <T,>(bar:T): void => {}",
+            output: "const foo = <T,>(bar:T): void => {}",
             options: ["arrow"],
             errors: [{ message: messages["arrow-in-top-level"] }]
         },
         {
             code: "function foo<T>(bar:T): void {}",
-            output: "var foo = function<T,>(bar:T): void {}",
+            output: "const foo = function<T,>(bar:T): void {}",
             options: ["expression"],
             errors: [{ message: messages["expression-in-top-level"] }]
         },
         {
             code: "function* foo() {}",
-            output: "var foo = function* () {}",
+            output: "const foo = function* () {}",
             options: ["expression"],
             errors: [{ message: messages["expression-in-top-level"] }]
         },
         {
             code: "function* foo() {}",
-            output: "var foo = function* () {}",
+            output: "const foo = function* () {}",
             options: ["arrow"],
             errors: [{ message: messages["arrow-in-top-level"] }]
         }
