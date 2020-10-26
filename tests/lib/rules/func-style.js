@@ -16,7 +16,6 @@ new RuleTester({
     }
 }).run("func-style", rule, {
     valid: [
-
         {
             code: "function foo() {}",
             options: ["declaration"]
@@ -52,6 +51,10 @@ new RuleTester({
         {
             code: "export default function foo() {const bar = () => {};}",
             options: ["arrow", { topLevelStyle: "arrow", allowExportDefaultFunctionDeclaration: true }]
+        },
+        {
+            code: "var foo = function* () {}",
+            options: ["arrow"]
         }
     ],
     invalid: [
@@ -121,6 +124,18 @@ new RuleTester({
             output: "var foo = function<T,>(bar:T): void {}",
             options: ["expression"],
             errors: [{ message: messages["expression-in-top-level"] }]
+        },
+        {
+            code: "function* foo() {}",
+            output: "var foo = function* () {}",
+            options: ["expression"],
+            errors: [{ message: messages["expression-in-top-level"] }]
+        },
+        {
+            code: "function* foo() {}",
+            output: "var foo = function* () {}",
+            options: ["arrow"],
+            errors: [{ message: messages["arrow-in-top-level"] }]
         }
     ]
 });
