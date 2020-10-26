@@ -14,7 +14,8 @@
     "lint": "eslint lib scripts tests",
     "update": "node scripts/update",
     "pretest": "npm run -s lint",
-    "test": "nyc mocha \"tests/lib/**/*.js\" --reporter progress",
+    "test": "yarn test-only",
+    "test-only": "nyc mocha \"tests/lib/**/*.js\" --reporter progress",
     "version": "npm run -s update"
   },
   "peerDependencies": {
