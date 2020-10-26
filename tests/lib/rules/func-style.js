@@ -16,6 +16,7 @@ new RuleTester({
     }
 }).run("func-style", rule, {
     valid: [
+
         {
             code: "function foo() {}",
             options: ["declaration"]
@@ -54,6 +55,7 @@ new RuleTester({
         }
     ],
     invalid: [
+
         {
             code: "const foo = (bar: Bar, h=null) => {}",
             output: "function foo(bar: Bar, h=null) {}",
@@ -107,6 +109,18 @@ new RuleTester({
             output: "function foo() {return 1}",
             options: ["declaration"],
             errors: [{ message: messages["declaration-in-top-level"] }]
+        },
+        {
+            code: "function foo<T>(bar:T): void {}",
+            output: "var foo = <T,>(bar:T): void => {}",
+            options: ["arrow"],
+            errors: [{ message: messages["arrow-in-top-level"] }]
+        },
+        {
+            code: "function foo<T>(bar:T): void {}",
+            output: "var foo = function<T,>(bar:T): void {}",
+            options: ["expression"],
+            errors: [{ message: messages["expression-in-top-level"] }]
         }
     ]
 });
