@@ -19,7 +19,8 @@ new RuleTester({
         "const App: React.VFC<IAnimalProps> = ()=> null;",
         "const App: React.FunctionComponent<IAnimalProps> = ()=> null;",
         "const App: React.VoidFunctionComponent<IAnimalProps> = ()=> null;",
-        "const App: React.FC = ()=> null;"
+        "const App: React.FC = ()=> null;",
+        "const App: React.FC = ({ children: a })=> null;"
     ],
     invalid: [{
         code: "const App: React.FC = ({ foo })=> null;",
@@ -53,6 +54,16 @@ new RuleTester({
     },
     {
         code: "const App: React.VoidFunctionComponent = ({ foo })=> null;",
+        errors: [
+            {
+                messageId: "requirePropsType",
+                line: 1,
+                column: 12
+            }
+        ]
+    },
+    {
+        code: "const App: React.FC = ({ children, foo })=> null;",
         errors: [
             {
                 messageId: "requirePropsType",
