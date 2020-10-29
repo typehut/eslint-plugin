@@ -20,7 +20,8 @@ new RuleTester({
         "const App: React.FC<AnimalProps> = ()=> null;",
         "const App: React.FC<AnimalProps> = ()=> {return (<div></div>)}",
         "const App: React.FC<AnimalProps> = ({children})=> {return (<div></div>)}",
-        "const App = ()=> null;"
+        "const App = ()=> null;",
+        "const App: React.FC<{}> = ()=> null;"
     ],
     invalid: [{
         code: "const App: React.FC<IAnimal> = ()=> null;",
