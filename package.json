@@ -21,7 +21,10 @@
   "peerDependencies": {
     "eslint": ">=7.11.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "jsx-ast-utils": "^3.1.0"
+  },
   "devDependencies": {
     "@types/node": "^12.12.2",
     "@typescript-eslint/parser": "^4.4.1",
