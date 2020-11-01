@@ -48,6 +48,7 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 | Rule ID | Description |    |
 |:--------|:------------|:--:|
 | [@croutonn/jsx-a11y-anchor-has-content](./docs/rules/jsx-a11y-anchor-has-content.md) | Enforce that anchors have content and that the content is accessible to screen readers |  |
+| [@croutonn/jsx-a11y-control-has-associated-label](./docs/rules/jsx-a11y-control-has-associated-label.md) | Enforce that a control (an interactive element) has a text label |  |
 | [@croutonn/typescript-react-component-type](./docs/rules/typescript-react-component-type.md) | enforce `FC` and `FunctionComponent` types to one or the other | ⭐️✒️ |
 | [@croutonn/typescript-react-require-props-suffix](./docs/rules/typescript-react-require-props-suffix.md) | require that prop interface names be suffixed with `Props` | ⭐️ |
 | [@croutonn/typescript-react-require-props-type](./docs/rules/typescript-react-require-props-type.md) | require an props type to be provided to a React component | ⭐️ |
