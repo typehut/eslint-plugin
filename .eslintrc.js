@@ -2,6 +2,10 @@
 
 module.exports = {
     root: true,
+    env: {
+        es6: true,
+        node: true
+    },
     plugins: [
         "eslint-plugin"
     ],
@@ -10,6 +14,9 @@ module.exports = {
         "plugin:eslint-plugin/recommended"
     ],
     rules: {
+        "jsdoc/require-description": "off",
+        "jsdoc/require-param-description": "off",
+        "jsdoc/require-returns-description": "off",
         "eslint-plugin/consistent-output": "error",
         "eslint-plugin/no-deprecated-context-methods": "error",
         "eslint-plugin/prefer-output-null": "error",

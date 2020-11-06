@@ -137,18 +137,21 @@ new RuleTester({
         {
             code: `
             export const test = true
-            export const another = true
-        `,
+            export const another = true`,
+            output: `
+             const test = true
+             const another = true
+export { test, another }`,
             errors: [
+                errors.named,
                 errors.named,
                 errors.named
             ]
         },
         {
-            code: `
-            export { method1 } from './module-1'
-            export { method2 } from './module-1'
-        `,
+            code: `export { method1 } from './module-1'
+export { method2 } from './module-1'`,
+            output: "export { method1, method2 } from './module-1'\n\n",
             errors: [
                 errors.named,
                 errors.named
@@ -158,8 +161,8 @@ new RuleTester({
             code: `
             module.exports = {}
             module.exports.test = true
-            module.exports.another = true
-        `,
+            module.exports.another = true`,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs,
@@ -171,6 +174,7 @@ new RuleTester({
             module.exports = {}
             module.exports.test = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -181,6 +185,7 @@ new RuleTester({
             module.exports = { test: true }
             module.exports.another = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -191,6 +196,7 @@ new RuleTester({
             module.exports.test = true
             module.exports.another = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -201,6 +207,7 @@ new RuleTester({
             exports.test = true
             module.exports.another = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -211,6 +218,7 @@ new RuleTester({
             module.exports = () => {}
             module.exports.attached = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -221,6 +229,7 @@ new RuleTester({
             module.exports = function () {}
             module.exports.attached = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -232,6 +241,7 @@ new RuleTester({
             exports.test = true
             exports.another = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs,
@@ -243,6 +253,7 @@ new RuleTester({
             module.exports = "non-object"
             module.exports.attached = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs
@@ -254,6 +265,7 @@ new RuleTester({
             module.exports.attached = true
             module.exports.another = true
         `,
+            output: null,
             errors: [
                 errors.commonjs,
                 errors.commonjs,
@@ -271,18 +283,30 @@ new RuleTester({
             const first = {};
             export type { firstType };
             export type { secondType };
-            export { first };
-        `,
+            export { first };`,
+            output: `
+            type firstType = {
+            propType: string
+            };
+            type secondType = {
+            propType: string
+            };
+            const first = {};
+            
+            
+            
+export type { firstType, secondType }
+export { first }`,
             errors: [
+                errors.named,
                 errors.named,
                 errors.named
             ]
         },
         {
-            code: `
-            export type { type1 } from './module-1'
-            export type { type2 } from './module-1'
-        `,
+            code: `export type { type1 } from './module-1'
+export type { type2 } from './module-1'`,
+            output: "export type { type1, type2 } from './module-1'\n\n",
             errors: [
                 errors.named,
                 errors.named
