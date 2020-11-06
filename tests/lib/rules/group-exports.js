@@ -311,6 +311,18 @@ export type { type2 } from './module-1'`,
                 errors.named,
                 errors.named
             ]
+        },
+        {
+            code: `export const { foo: foo1, bar: { bar: bar1 }, hoge: [hoge1, hoge2] } = { foo: "foo", bar: { bar: "bar" }, hoge: ["hoge1", "hoge2"] }
+export const foo2 = "foo2"`,
+            output: `const { foo: foo1, bar: { bar: bar1 }, hoge: [hoge1, hoge2] } = { foo: "foo", bar: { bar: "bar" }, hoge: ["hoge1", "hoge2"] }
+const foo2 = "foo2"
+export { foo1, bar1, hoge1, hoge2, foo2 }`,
+            errors: [
+                errors.named,
+                errors.named,
+                errors.named
+            ]
         }
     ]
 });
