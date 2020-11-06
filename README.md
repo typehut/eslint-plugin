@@ -6,6 +6,7 @@
 [![Dependency Status](https://david-dm.org/croutonn/eslint-plugin.svg)](https://david-dm.org/croutonn/eslint-plugin)
 
 This is a plugin that puts the ESLint rules I have wanted into one place.
+It also contains rules for existing plug-ins with additional auto-fixer.
 
 ## Installation
 
