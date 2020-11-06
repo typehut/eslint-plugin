@@ -139,8 +139,8 @@ new RuleTester({
             export const test = true
             export const another = true`,
             output: `
-             const test = true
-             const another = true
+            const test = true
+            const another = true
 export { test, another }`,
             errors: [
                 errors.named,
