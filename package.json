@@ -1,6 +1,6 @@
 {
   "name": "@croutonn/eslint-plugin",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "This is a plugin that puts the ESLint rules I have wanted into one place.",
   "engines": {
     "node": ">=8.10.0"
