@@ -48,6 +48,7 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 | Rule ID | Description |    |
 |:--------|:------------|:--:|
+| [@croutonn/exports-last](./docs/rules/exports-last.md) | This rule enforces that all exports are declared at the bottom of the file. This rule will report any export declarations that comes before any non-export statements. | ⭐️✒️ |
 | [@croutonn/group-exports](./docs/rules/group-exports.md) | Reports when named exports are not grouped together in a single export declaration or when multiple assignments to CommonJS module.exports or exports object are present in a single file | ⭐️✒️ |
 | [@croutonn/jsx-a11y-anchor-has-content](./docs/rules/jsx-a11y-anchor-has-content.md) | Enforce that anchors have content and that the content is accessible to screen readers |  |
 | [@croutonn/jsx-a11y-control-has-associated-label](./docs/rules/jsx-a11y-control-has-associated-label.md) | Enforce that a control (an interactive element) has a text label |  |
