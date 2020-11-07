@@ -1,19 +1,15 @@
 "use strict";
 
-const { RuleTester } = require("eslint");
+const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/typescript-react-require-props-suffix");
 
-new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2015,
-        ecmaFeatures: {
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-}).run("typescript-react-require-props-suffix", rule, {
+/**
+ * @typedef {import("../../../lib/rules/typescript-react-require-props-suffix").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
+
+ruleTester().run("typescript-react-require-props-suffix", rule, {
     valid: [
         "const App: React.FC = ()=> null;",
         "const App: React.FC<IAnimalProps> = ()=> null;",
@@ -25,42 +21,18 @@ new RuleTester({
     ],
     invalid: [{
         code: "const App: React.FC<IAnimal> = ()=> null;",
-        errors: [
-            {
-                messageId: "requireSuffix",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requireSuffix")
     },
     {
         code: "const App: React.FC<Props> = ()=> null;",
-        errors: [
-            {
-                messageId: "requireSuffix",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requireSuffix")
     },
     {
         code: "const App: React.FC<IAnimalprops> = ()=> null;",
-        errors: [
-            {
-                messageId: "requireSuffix",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requireSuffix")
     },
     {
         code: "const App: React.FC<> = ()=> null;",
-        errors: [
-            {
-                messageId: "requireSuffix",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requireSuffix")
     }]
 });

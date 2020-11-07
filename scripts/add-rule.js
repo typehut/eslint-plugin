@@ -45,61 +45,75 @@ fs.writeFileSync(docPath, `# ${pluginId}/${ruleId}
 fs.writeFileSync(rulePath, `"use strict";
 
 /**
- * @typedef {import("eslint").Rule.RuleModule} RuleModule
- * @typedef {import("estree").Node} ASTNode
+ * @typedef {} RuleErrorId
  */
 
 /**
- * @type RuleModule
+ * @type {RuleMetaDataMessages}
  */
-module.exports = {
-    meta: {
-        docs: {
-            // TODO: write the rule summary.
-            description: "",
+const errors = {}
 
-            // TODO: choose the rule category.
-            category: "Possible Errors",
-            category: "Best Practices",
-            category: "Stylistic Issues",
+/**
+ * @type {RuleMetaDataSchema}
+ */
+const schema = [];
 
-            recommended: false,
-            url: "${docUrl}"
-        },
+/**
+ * @type {RuleMetaData}
+ */
+const meta = {
+    docs: {
+        // TODO: write the rule summary.
+        description: "",
 
-        fixable: null,
-        messages: {},
-        schema: [],
+        // TODO: choose the rule category.
+        category: "Possible Errors",
+        category: "Best Practices",
+        category: "Stylistic Issues",
 
-        // TODO: choose the rule type.
-        type: "problem",
-        type: "suggestion",
-        type: "layout"
+        recommended: false,
+        url: "${docUrl}"
     },
 
-    create(context) {
-        const sourceCode = context.getSourceCode();
-        return {}
-    }
+    fixable: null,
+    messages: errors,
+    schema,
+
+    // TODO: choose the rule type.
+    type: "problem",
+    type: "suggestion",
+    type: "layout"
+}
+
+/**
+ * @type {RuleCreator}
+ */
+function create(context) {
+    const sourceCode = context.getSourceCode();
+    return {}
+}
+
+/**
+ * @type {RuleModule}
+ */
+module.exports = {
+    meta,
+    create
 };
 `);
 
 fs.writeFileSync(testPath, `"use strict";
 
-const { RuleTester } = require("eslint");
+const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/${ruleId}");
 
-new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2015,
-        ecmaFeatures: {
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-}).run("${ruleId}", rule, {
+/**
+ * @typedef {import("../../../lib/rules/${ruleId}").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
+
+ruleTester().run("${ruleId}", rule, {
     valid: [],
     invalid: []
 });

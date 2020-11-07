@@ -1,19 +1,15 @@
 "use strict";
 
-const { RuleTester } = require("eslint");
+const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/typescript-react-require-props-type");
 
-new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2015,
-        ecmaFeatures: {
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-}).run("typescript-react-require-props-type", rule, {
+/**
+ * @typedef {import("../../../lib/rules/typescript-react-require-props-type").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
+
+ruleTester().run("typescript-react-require-props-type", rule, {
     valid: [
         "const App: React.FC<IAnimalProps> = ()=> null;",
         "const App: React.VFC<IAnimalProps> = ()=> null;",
@@ -24,53 +20,23 @@ new RuleTester({
     ],
     invalid: [{
         code: "const App: React.FC = ({ foo })=> null;",
-        errors: [
-            {
-                messageId: "requirePropsType",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requirePropsType")
     },
     {
         code: "const App: React.VFC = ({ foo })=> null;",
-        errors: [
-            {
-                messageId: "requirePropsType",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requirePropsType")
     },
     {
         code: "const App: React.FunctionComponent = ({ foo })=> null;",
-        errors: [
-            {
-                messageId: "requirePropsType",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requirePropsType")
     },
     {
         code: "const App: React.VoidFunctionComponent = ({ foo })=> null;",
-        errors: [
-            {
-                messageId: "requirePropsType",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requirePropsType")
     },
     {
         code: "const App: React.FC = ({ children, foo })=> null;",
-        errors: [
-            {
-                messageId: "requirePropsType",
-                line: 1,
-                column: 12
-            }
-        ]
+        errors: errors("requirePropsType")
     }
     ]
 });

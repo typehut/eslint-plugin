@@ -1,24 +1,16 @@
 "use strict";
 
-const { RuleTester } = require("eslint");
+const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/jsx-a11y-anchor-has-content");
 
-const expectedError = {
-    messageId: "error",
-    type: "JSXOpeningElement"
-};
+/**
+ * @typedef {import("../../../lib/rules/jsx-a11y-anchor-has-content").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
+const expectedErrors = errors(["enforceAnchorHasContent", "JSXOpeningElement"]);
 
-new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2015,
-        ecmaFeatures: {
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-}).run("jsx-a11y-anchor-has-content", rule, {
+ruleTester().run("jsx-a11y-anchor-has-content", rule, {
     valid: [
         "<div />;",
         "<a>Foo</a>",
@@ -30,9 +22,9 @@ new RuleTester({
         "<Trans components={[<a href=\"foo\" />]} />"
     ],
     invalid: [
-        { code: "<a />", errors: [expectedError] },
-        { code: "<a><Bar aria-hidden /></a>", errors: [expectedError] },
-        { code: "<a>{undefined}</a>", errors: [expectedError] },
-        { code: "<Trans components={[<a href=\"foo\" />]} />", options: [{ ignoreAttributeInner: false }], errors: [expectedError] }
+        { code: "<a />", errors: expectedErrors },
+        { code: "<a><Bar aria-hidden /></a>", errors: expectedErrors },
+        { code: "<a>{undefined}</a>", errors: expectedErrors },
+        { code: "<Trans components={[<a href=\"foo\" />]} />", options: [{ ignoreAttributeInner: false }], errors: expectedErrors }
     ]
 });

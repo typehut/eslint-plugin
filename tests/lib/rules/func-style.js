@@ -1,20 +1,15 @@
 "use strict";
 
-const { RuleTester } = require("eslint");
+const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/func-style");
-const { messages } = rule.meta;
 
-new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2015,
-        ecmaFeatures: {
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-}).run("func-style", rule, {
+/**
+ * @typedef {import("../../../lib/rules/func-style").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
+
+ruleTester().run("func-style", rule, {
     valid: [
         {
             code: "function foo() {}",
@@ -63,79 +58,79 @@ new RuleTester({
             code: "const foo = (bar: Bar, h=null) => {}",
             output: "function foo(bar: Bar, h=null) {}",
             options: ["declaration"],
-            errors: [{ message: messages["declaration-in-top-level"] }]
+            errors: errors("declarationInTopLevel")
         },
         {
             code: "const foo = () => {}",
             output: "function foo() {}",
             options: ["declaration"],
-            errors: [{ message: messages["declaration-in-top-level"] }]
+            errors: errors("declarationInTopLevel")
         },
         {
             code: "function foo() {}",
             output: "const foo = function() {}",
             options: ["expression"],
-            errors: [{ message: messages["expression-in-top-level"] }]
+            errors: errors("expressionInTopLevel")
         },
         {
             code: "const foo = function(){}",
             output: "function foo() {}",
             options: ["declaration"],
-            errors: [{ message: messages["declaration-in-top-level"] }]
+            errors: errors("declarationInTopLevel")
         },
         {
             code: "function foo() {const bar = function(){}}",
             output: "function foo() {const bar = () => {}}",
             options: ["arrow", { topLevelStyle: "declaration" }],
-            errors: [{ message: messages.arrow }]
+            errors: errors("arrow")
         },
         {
             code: "function foo() {const bar = () => {}}",
             output: "function foo() {const bar = function() {}}",
             options: ["expression", { topLevelStyle: "declaration" }],
-            errors: [{ message: messages.expression }]
+            errors: errors("expression")
         },
         {
             code: "function foo() {const bar = () => {}}",
             output: "function foo() {function bar() {}}",
             options: ["declaration"],
-            errors: [{ message: messages.declaration }]
+            errors: errors("declaration")
         },
         {
             code: "async function foo() {const bar = function(){}}",
             output: "const foo = async () => {const bar = () => {}}",
             options: ["arrow"],
-            errors: [{ message: messages["arrow-in-top-level"] }, { message: messages.arrow }]
+            errors: errors("arrowInTopLevel", "arrow")
         },
         {
             code: "const foo = () => 1",
             output: "function foo() {return 1}",
             options: ["declaration"],
-            errors: [{ message: messages["declaration-in-top-level"] }]
+            errors: errors("declarationInTopLevel")
         },
         {
             code: "function foo<T>(bar:T): void {}",
             output: "const foo = <T,>(bar:T): void => {}",
             options: ["arrow"],
-            errors: [{ message: messages["arrow-in-top-level"] }]
+            errors: errors("arrowInTopLevel")
         },
         {
             code: "function foo<T>(bar:T): void {}",
             output: "const foo = function<T,>(bar:T): void {}",
             options: ["expression"],
-            errors: [{ message: messages["expression-in-top-level"] }]
+            errors: errors("expressionInTopLevel")
         },
         {
             code: "function* foo() {}",
             output: "const foo = function* () {}",
             options: ["expression"],
-            errors: [{ message: messages["expression-in-top-level"] }]
+            errors: errors("expressionInTopLevel")
         },
         {
             code: "function* foo() {}",
             output: "const foo = function* () {}",
             options: ["arrow"],
-            errors: [{ message: messages["arrow-in-top-level"] }]
+            errors: errors("arrowInTopLevel")
         }
     ]
 });

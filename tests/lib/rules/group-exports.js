@@ -1,24 +1,15 @@
 "use strict";
 
-const { RuleTester } = require("eslint");
+const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/group-exports");
 
-const errors = {
-    named: { messageId: "ExportNamedDeclaration" },
-    commonjs: { messageId: "AssignmentExpression" }
-};
+/**
+ * @typedef {import("../../../lib/rules/group-exports").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
 
-new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2015,
-        ecmaFeatures: {
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-}).run("group-exports", rule, {
+ruleTester().run("group-exports", rule, {
     valid: [
         "export const test = true",
         `
@@ -142,20 +133,13 @@ new RuleTester({
             const test = true
             const another = true
 export { test, another }`,
-            errors: [
-                errors.named,
-                errors.named,
-                errors.named
-            ]
+            errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration", "ExportNamedDeclaration")
         },
         {
             code: `export { method1 } from './module-1'
 export { method2 } from './module-1'`,
             output: "export { method1, method2 } from './module-1'\n\n",
-            errors: [
-                errors.named,
-                errors.named
-            ]
+            errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration")
         },
         {
             code: `
@@ -163,11 +147,7 @@ export { method2 } from './module-1'`,
             module.exports.test = true
             module.exports.another = true`,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -175,10 +155,7 @@ export { method2 } from './module-1'`,
             module.exports.test = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -186,10 +163,7 @@ export { method2 } from './module-1'`,
             module.exports.another = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -197,10 +171,7 @@ export { method2 } from './module-1'`,
             module.exports.another = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -208,10 +179,7 @@ export { method2 } from './module-1'`,
             module.exports.another = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -219,10 +187,7 @@ export { method2 } from './module-1'`,
             module.exports.attached = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -230,10 +195,7 @@ export { method2 } from './module-1'`,
             module.exports.attached = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -242,11 +204,7 @@ export { method2 } from './module-1'`,
             exports.another = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -254,10 +212,7 @@ export { method2 } from './module-1'`,
             module.exports.attached = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -266,11 +221,7 @@ export { method2 } from './module-1'`,
             module.exports.another = true
         `,
             output: null,
-            errors: [
-                errors.commonjs,
-                errors.commonjs,
-                errors.commonjs
-            ]
+            errors: errors("AssignmentExpression", "AssignmentExpression", "AssignmentExpression")
         },
         {
             code: `
@@ -297,20 +248,13 @@ export { method2 } from './module-1'`,
             
 export type { firstType, secondType }
 export { first }`,
-            errors: [
-                errors.named,
-                errors.named,
-                errors.named
-            ]
+            errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration", "ExportNamedDeclaration")
         },
         {
             code: `export type { type1 } from './module-1'
 export type { type2 } from './module-1'`,
             output: "export type { type1, type2 } from './module-1'\n\n",
-            errors: [
-                errors.named,
-                errors.named
-            ]
+            errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration")
         },
         {
             code: `export const { foo: foo1, bar: { bar: bar1 }, hoge: [hoge1, hoge2] } = { foo: "foo", bar: { bar: "bar" }, hoge: ["hoge1", "hoge2"] }
@@ -318,11 +262,7 @@ export const foo2 = "foo2"`,
             output: `const { foo: foo1, bar: { bar: bar1 }, hoge: [hoge1, hoge2] } = { foo: "foo", bar: { bar: "bar" }, hoge: ["hoge1", "hoge2"] }
 const foo2 = "foo2"
 export { foo1, bar1, hoge1, hoge2, foo2 }`,
-            errors: [
-                errors.named,
-                errors.named,
-                errors.named
-            ]
+            errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration", "ExportNamedDeclaration")
         }
     ]
 });

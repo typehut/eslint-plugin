@@ -1,28 +1,18 @@
 "use strict";
 
-const { RuleTester } = require("eslint");
+const getRuleTester = require("../utils/rule-tester");
 const ruleOptionsMapperFactory = require("../utils/rule-options-mapper-factory");
 const configs = require("eslint-plugin-jsx-a11y/lib/index").configs;
 const rule = require("../../../lib/rules/jsx-a11y-control-has-associated-label");
 const ruleName = "jsx-a11y/control-has-associated-label";
-const ruleTester = new RuleTester({
-    parser: require.resolve("@typescript-eslint/parser"),
-    parserOptions: {
-        ecmaVersion: 2018,
-        ecmaFeatures: {
-            experimentalObjectRestSpread: true,
-            jsx: true
-        },
-        lib: ["dom", "dom.iterable", "esnext"],
-        sourceType: "module"
-    }
-});
+const ruleTester = getRuleTester();
 
-const expectedError = {
-    messageId: "error",
-    type: "JSXOpeningElement"
-};
-
+/**
+ * @typedef {import("../../../lib/rules/jsx-a11y-control-has-associated-label").RuleErrorId} RuleErrorId
+ * @type {(...args:(RuleErrorId|[RuleErrorId,string?]|{messageId:RuleErrorId;type?:string})[]) => Array<{messageId:RuleErrorId;type?:string}>}
+ */
+const errors = require("../utils/errors");
+const expectedErrors = errors(["enforceControlHasAssociatedLabel", "JSXOpeningElement"]);
 
 const alwaysValid = [
 
@@ -256,40 +246,40 @@ const alwaysValid = [
     { code: '<Foo attr={[<a href="bar" />]} />' }
 ];
 const neverValid = [
-    { code: "<button />", errors: [expectedError] },
-    { code: "<button><span /></button>", errors: [expectedError] },
-    { code: "<button><img /></button>", errors: [expectedError] },
-    { code: '<button><span title="This is not a real label" /></button>', errors: [expectedError] },
-    { code: "<button><span><span><span>Save</span></span></span></button>", options: [{ depth: 3 }], errors: [expectedError] },
-    { code: "<CustomControl><span><span></span></span></CustomControl>", options: [{ depth: 3, controlComponents: ["CustomControl"] }], errors: [expectedError] },
-    { code: '<a href="#" />', errors: [expectedError] },
-    { code: '<area href="#" />', errors: [expectedError] },
-    { code: "<menuitem />", errors: [expectedError] },
-    { code: "<option />", errors: [expectedError] },
-    { code: "<th />", errors: [expectedError] },
+    { code: "<button />", errors: expectedErrors },
+    { code: "<button><span /></button>", errors: expectedErrors },
+    { code: "<button><img /></button>", errors: expectedErrors },
+    { code: '<button><span title="This is not a real label" /></button>', errors: expectedErrors },
+    { code: "<button><span><span><span>Save</span></span></span></button>", options: [{ depth: 3 }], errors: expectedErrors },
+    { code: "<CustomControl><span><span></span></span></CustomControl>", options: [{ depth: 3, controlComponents: ["CustomControl"] }], errors: expectedErrors },
+    { code: '<a href="#" />', errors: expectedErrors },
+    { code: '<area href="#" />', errors: expectedErrors },
+    { code: "<menuitem />", errors: expectedErrors },
+    { code: "<option />", errors: expectedErrors },
+    { code: "<th />", errors: expectedErrors },
 
     // Interactive Roles
-    { code: '<div role="button" />', errors: [expectedError] },
-    { code: '<div role="checkbox" />', errors: [expectedError] },
-    { code: '<div role="columnheader" />', errors: [expectedError] },
-    { code: '<div role="combobox" />', errors: [expectedError] },
-    { code: '<div role="link" />', errors: [expectedError] },
-    { code: '<div role="gridcell" />', errors: [expectedError] },
-    { code: '<div role="menuitem" />', errors: [expectedError] },
-    { code: '<div role="menuitemcheckbox" />', errors: [expectedError] },
-    { code: '<div role="menuitemradio" />', errors: [expectedError] },
-    { code: '<div role="option" />', errors: [expectedError] },
-    { code: '<div role="progressbar" />', errors: [expectedError] },
-    { code: '<div role="radio" />', errors: [expectedError] },
-    { code: '<div role="rowheader" />', errors: [expectedError] },
-    { code: '<div role="scrollbar" />', errors: [expectedError] },
-    { code: '<div role="searchbox" />', errors: [expectedError] },
-    { code: '<div role="slider" />', errors: [expectedError] },
-    { code: '<div role="spinbutton" />', errors: [expectedError] },
-    { code: '<div role="switch" />', errors: [expectedError] },
-    { code: '<div role="tab" />', errors: [expectedError] },
-    { code: '<div role="textbox" />', errors: [expectedError] },
-    { code: '<Foo attr={[<a href="bar" />]} />', options: [{ ignoreAttributeInner: false }], errors: [expectedError] }
+    { code: '<div role="button" />', errors: expectedErrors },
+    { code: '<div role="checkbox" />', errors: expectedErrors },
+    { code: '<div role="columnheader" />', errors: expectedErrors },
+    { code: '<div role="combobox" />', errors: expectedErrors },
+    { code: '<div role="link" />', errors: expectedErrors },
+    { code: '<div role="gridcell" />', errors: expectedErrors },
+    { code: '<div role="menuitem" />', errors: expectedErrors },
+    { code: '<div role="menuitemcheckbox" />', errors: expectedErrors },
+    { code: '<div role="menuitemradio" />', errors: expectedErrors },
+    { code: '<div role="option" />', errors: expectedErrors },
+    { code: '<div role="progressbar" />', errors: expectedErrors },
+    { code: '<div role="radio" />', errors: expectedErrors },
+    { code: '<div role="rowheader" />', errors: expectedErrors },
+    { code: '<div role="scrollbar" />', errors: expectedErrors },
+    { code: '<div role="searchbox" />', errors: expectedErrors },
+    { code: '<div role="slider" />', errors: expectedErrors },
+    { code: '<div role="spinbutton" />', errors: expectedErrors },
+    { code: '<div role="switch" />', errors: expectedErrors },
+    { code: '<div role="tab" />', errors: expectedErrors },
+    { code: '<div role="textbox" />', errors: expectedErrors },
+    { code: '<Foo attr={[<a href="bar" />]} />', options: [{ ignoreAttributeInner: false }], errors: expectedErrors }
 ];
 
 const recommendedOptions = (configs.recommended.rules[ruleName][1] || {});
@@ -303,7 +293,6 @@ ruleTester.run(`${ruleName}:recommended`, rule, {
         ...neverValid
     ]
         .map(ruleOptionsMapperFactory(recommendedOptions))
-
 });
 
 const strictOptions = (configs.strict.rules[ruleName][1] || {});
@@ -317,7 +306,6 @@ ruleTester.run(`${ruleName}:strict`, rule, {
         ...neverValid
     ]
         .map(ruleOptionsMapperFactory(strictOptions))
-
 });
 
 ruleTester.run(`${ruleName}:no-config`, rule, {
@@ -326,7 +314,6 @@ ruleTester.run(`${ruleName}:no-config`, rule, {
         '<input type="text" aria-hidden="true" />'
     ],
     invalid: [
-        { code: '<input type="text" />', errors: [expectedError] }
+        { code: '<input type="text" />', errors: expectedErrors }
     ]
-
 });
