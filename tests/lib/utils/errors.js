@@ -1,7 +1,6 @@
 "use strict";
 
 /**
- * @param {string} type
  * @param {...any} args
  * @returns {messageId: string, type: string}
  */
