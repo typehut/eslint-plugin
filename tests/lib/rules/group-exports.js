@@ -263,6 +263,14 @@ export const foo2 = "foo2"`,
 const foo2 = "foo2"
 export { foo1, bar1, hoge1, hoge2, foo2 }`,
             errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration", "ExportNamedDeclaration")
+        },
+        {
+            code: `export const foo = "foo"
+export { foo }`,
+            output: `const foo = "foo"
+
+export { foo }`,
+            errors: errors("ExportNamedDeclaration", "ExportNamedDeclaration", "ExportNamedDeclaration")
         }
     ]
 });
