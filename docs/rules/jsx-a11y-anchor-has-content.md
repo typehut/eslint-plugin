@@ -1,4 +1,5 @@
 # @croutonn/jsx-a11y-anchor-has-content
+
 > Enforce that anchors have content and that the content is accessible to screen readers
 
 Accessible means that it is not hidden using the `aria-hidden` prop. Refer to the references to learn about why this is important.
@@ -9,16 +10,18 @@ This rule takes one optional object argument of type object:
 
 ```json
 {
-    "rules": {
-        "jsx-a11y/anchor-has-content": [ 2, {
-            "components": [ "Anchor" ],
-          }],
-    }
+  "rules": {
+    "jsx-a11y/anchor-has-content": [
+      2,
+      {
+        "components": ["Anchor"]
+      }
+    ]
+  }
 }
 ```
 
 For the `components` option, these strings determine which JSX elements (**always including** `<a>`) should be checked for having content. This is a good use case when you have a wrapper component that simply renders an `a` element (like in React):
-
 
 ```js
 // Anchor.js
@@ -38,6 +41,7 @@ return (
 ```
 
 ### Succeed
+
 ```jsx
 <a>Anchor Content!</a>
 <a><TextWrapper /><a>
@@ -45,6 +49,7 @@ return (
 ```
 
 ### Fail
+
 ```jsx
 <a />
 <a><TextWrapper aria-hidden /></a>
@@ -59,10 +64,12 @@ This rule has an object option for an exception:
 - `"attributeTracingDepth"` -1 (default: `4`) The number of AST nodes trace when applying ignoreAttributeInner. Specify `-1` to trace indefinitely.
 
 ## Accessibility guidelines
+
 - [WCAG 2.4.4](https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context)
 - [WCAG 4.1.2](https://www.w3.org/WAI/WCAG21/Understanding/name-role-value)
 
 ### Resources
+
 - [axe-core, link-name](https://dequeuniversity.com/rules/axe/3.2/link-name)
 
 ## Implementation

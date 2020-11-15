@@ -14,9 +14,9 @@ module.exports = {
     plugins: ["${pluginId}"],
     rules: {
         ${rules
-        .filter(rule => rule.recommended)
-        .map(rule => `"${rule.id}": "error"`)
-        .join(",\n        ")}
+          .filter((rule) => rule.recommended)
+          .map((rule) => `"${rule.id}": "error"`)
+          .join(",\n        ")}
     }
 };
 `;

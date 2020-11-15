@@ -14,7 +14,9 @@ module.exports = {
         recommended: require("./configs/recommended")
     },
     rules: {
-        ${rules.map(rule => `"${rule.name}": require("./rules/${rule.name}")`).join(",\n        ")}
+        ${rules
+          .map((rule) => `"${rule.name}": require("./rules/${rule.name}")`)
+          .join(",\n        ")}
     }
 };
 `;

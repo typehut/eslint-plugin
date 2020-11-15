@@ -1,4 +1,5 @@
 # @croutonn/jsx-a11y-control-has-associated-label
+
 > Enforce that a control (an interactive element) has a text label
 
 ## Rule Details
@@ -52,11 +53,13 @@ You can configure the rule to be aware of your custom components. Refer to the R
 ```
 
 ### Succeed
+
 ```jsx
 <button type="button" aria-label="Save" class="icon-save" />
 ```
 
 ### Fail
+
 ```jsx
 <button type="button" class="icon-save" />
 ```
@@ -68,32 +71,35 @@ This rule takes one optional object argument of type object:
 ```json
 {
   "rules": {
-    "jsx-a11y/control-has-associated-label": [ 2, {
-      "labelAttributes": ["label"],
-      "controlComponents": ["CustomComponent"],
-      "ignoreElements": [
-        "audio",
-        "canvas",
-        "embed",
-        "input",
-        "textarea",
-        "tr",
-        "video",
-      ],
-      "ignoreRoles": [
-        "grid",
-        "listbox",
-        "menu",
-        "menubar",
-        "radiogroup",
-        "row",
-        "tablist",
-        "toolbar",
-        "tree",
-        "treegrid",
-      ],
-      "depth": 3,
-    }],
+    "jsx-a11y/control-has-associated-label": [
+      2,
+      {
+        "labelAttributes": ["label"],
+        "controlComponents": ["CustomComponent"],
+        "ignoreElements": [
+          "audio",
+          "canvas",
+          "embed",
+          "input",
+          "textarea",
+          "tr",
+          "video"
+        ],
+        "ignoreRoles": [
+          "grid",
+          "listbox",
+          "menu",
+          "menubar",
+          "radiogroup",
+          "row",
+          "tablist",
+          "toolbar",
+          "tree",
+          "treegrid"
+        ],
+        "depth": 3
+      }
+    ]
   }
 }
 ```
@@ -107,6 +113,7 @@ This rule takes one optional object argument of type object:
 - `"attributeTracingDepth"` -1 (default: `4`) The number of AST nodes trace when applying ignoreAttributeInner. Specify `-1` to trace indefinitely.
 
 ## Accessibility guidelines
+
 - [WCAG 1.3.1](https://www.w3.org/WAI/WCAG21/Understanding/info-and-relationships)
 - [WCAG 3.3.2](https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions)
 - [WCAG 4.1.2](https://www.w3.org/WAI/WCAG21/Understanding/name-role-value)

@@ -12,8 +12,9 @@
   "scripts": {
     "add-rule": "node scripts/add-rule",
     "lint": "eslint lib scripts tests",
+    "format": "prettier . --write",
     "update": "node scripts/update",
-    "pretest": "npm run -s lint",
+    "pretest": "npm run -s format && npm run -s lint",
     "test": "yarn test-only",
     "test-only": "nyc mocha \"tests/lib/**/*.js\" --reporter progress",
     "version": "npm run -s update"
@@ -32,11 +33,14 @@
     "@typescript-eslint/parser": "^4.7.0",
     "eslint": "^7.10.0",
     "eslint-config-eslint": "^6.0.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-eslint-plugin": "^2.3.0",
     "eslint-plugin-jsdoc": "^30.7.7",
     "eslint-plugin-node": "^11.1.0",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
+    "prettier": "^2.1.2",
+    "source-map": "^0.7.3",
     "typescript": "^4.0.5"
   },
   "repository": {

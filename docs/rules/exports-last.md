@@ -1,5 +1,7 @@
 # @croutonn/exports-last
+
 > This rule enforces that all exports are declared at the bottom of the file. This rule will report any export declarations that comes before any non-export statements.
+>
 > - ⭐️ This rule is included in `plugin:@croutonn/recommended` preset.
 > - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 

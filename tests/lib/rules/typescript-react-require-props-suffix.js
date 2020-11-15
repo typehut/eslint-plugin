@@ -10,29 +10,31 @@ const rule = require("../../../lib/rules/typescript-react-require-props-suffix")
 const errors = require("../utils/errors");
 
 ruleTester().run("typescript-react-require-props-suffix", rule, {
-    valid: [
-        "const App: React.FC = ()=> null;",
-        "const App: React.FC<IAnimalProps> = ()=> null;",
-        "const App: React.FC<AnimalProps> = ()=> null;",
-        "const App: React.FC<AnimalProps> = ()=> {return (<div></div>)}",
-        "const App: React.FC<AnimalProps> = ({children})=> {return (<div></div>)}",
-        "const App = ()=> null;",
-        "const App: React.FC<{}> = ()=> null;"
-    ],
-    invalid: [{
-        code: "const App: React.FC<IAnimal> = ()=> null;",
-        errors: errors("requireSuffix")
+  valid: [
+    "const App: React.FC = ()=> null;",
+    "const App: React.FC<IAnimalProps> = ()=> null;",
+    "const App: React.FC<AnimalProps> = ()=> null;",
+    "const App: React.FC<AnimalProps> = ()=> {return (<div></div>)}",
+    "const App: React.FC<AnimalProps> = ({children})=> {return (<div></div>)}",
+    "const App = ()=> null;",
+    "const App: React.FC<{}> = ()=> null;",
+  ],
+  invalid: [
+    {
+      code: "const App: React.FC<IAnimal> = ()=> null;",
+      errors: errors("requireSuffix"),
     },
     {
-        code: "const App: React.FC<Props> = ()=> null;",
-        errors: errors("requireSuffix")
+      code: "const App: React.FC<Props> = ()=> null;",
+      errors: errors("requireSuffix"),
     },
     {
-        code: "const App: React.FC<IAnimalprops> = ()=> null;",
-        errors: errors("requireSuffix")
+      code: "const App: React.FC<IAnimalprops> = ()=> null;",
+      errors: errors("requireSuffix"),
     },
     {
-        code: "const App: React.FC<> = ()=> null;",
-        errors: errors("requireSuffix")
-    }]
+      code: "const App: React.FC<> = ()=> null;",
+      errors: errors("requireSuffix"),
+    },
+  ],
 });

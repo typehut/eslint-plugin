@@ -10,11 +10,11 @@ const { categories } = require("./rules");
  * @returns {string} The table row.
  */
 function renderRule(rule) {
-    const mark = `${rule.recommended ? "⭐️" : ""}${rule.fixable ? "✒️" : ""}`;
-    const link = `[${rule.id}](./docs/rules/${rule.name}.md)`;
-    const description = rule.description || "(no description)";
+  const mark = `${rule.recommended ? "⭐️" : ""}${rule.fixable ? "✒️" : ""}`;
+  const link = `[${rule.id}](./docs/rules/${rule.name}.md)`;
+  const description = rule.description || "(no description)";
 
-    return `| ${link} | ${description} | ${mark} |`;
+  return `| ${link} | ${description} | ${mark} |`;
 }
 
 /**
@@ -23,10 +23,10 @@ function renderRule(rule) {
  * @returns {string} The section.
  */
 function renderCategory(category) {
-    if (category.rules.length === 0) {
-        return "";
-    }
-    return `### ${category.id}
+  if (category.rules.length === 0) {
+    return "";
+  }
+  return `### ${category.id}
 
 | Rule ID | Description |    |
 |:--------|:------------|:--:|
@@ -38,11 +38,11 @@ const filePath = path.resolve(__dirname, "../../README.md");
 const content = categories.map(renderCategory).filter(Boolean).join("\n");
 
 fs.writeFileSync(
-    filePath,
-    fs
-        .readFileSync(filePath, "utf8")
-        .replace(
-            /<!--RULE_TABLE_BEGIN-->[\s\S]*<!--RULE_TABLE_END-->/u,
-            `<!--RULE_TABLE_BEGIN-->\n${content}\n<!--RULE_TABLE_END-->`
-        )
+  filePath,
+  fs
+    .readFileSync(filePath, "utf8")
+    .replace(
+      /<!--RULE_TABLE_BEGIN-->[\s\S]*<!--RULE_TABLE_END-->/u,
+      `<!--RULE_TABLE_BEGIN-->\n${content}\n<!--RULE_TABLE_END-->`
+    )
 );

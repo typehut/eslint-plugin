@@ -19,32 +19,32 @@ const listFormatter = new Intl.ListFormat("en", { type: "conjunction" });
  * @returns {string} The document header.
  */
 function renderHeader(rule) {
-    const lines = [`# ${rule.id}`, `> ${rule.description}`];
+  const lines = [`# ${rule.id}`, `> ${rule.description}`];
 
-    if (rule.recommended) {
-        lines.push(
-            `> - ⭐️ This rule is included in \`plugin:${pluginId}/recommended\` preset.`
-        );
-    }
-    if (rule.fixable) {
-        lines.push(
-            "> - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule."
-        );
-    }
-    if (rule.deprecated) {
-        const replace = rule.replacedBy.map(
-            ruleId => `[${ruleId}](./${ruleId.replace(`${pluginId}/`, "")}.md)`
-        );
-        const replaceText =
-            replace.length === 0
-                ? ""
-                : ` Use ${listFormatter.format(replace)} instead.`;
+  if (rule.recommended) {
+    lines.push(
+      `> - ⭐️ This rule is included in \`plugin:${pluginId}/recommended\` preset.`
+    );
+  }
+  if (rule.fixable) {
+    lines.push(
+      "> - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule."
+    );
+  }
+  if (rule.deprecated) {
+    const replace = rule.replacedBy.map(
+      (ruleId) => `[${ruleId}](./${ruleId.replace(`${pluginId}/`, "")}.md)`
+    );
+    const replaceText =
+      replace.length === 0
+        ? ""
+        : ` Use ${listFormatter.format(replace)} instead.`;
 
-        lines.push(`> - ⛔ This rule has been deprecated.${replaceText}`);
-    }
-    lines.push("", "");
+    lines.push(`> - ⛔ This rule has been deprecated.${replaceText}`);
+  }
+  lines.push("", "");
 
-    return lines.join("\n");
+  return lines.join("\n");
 }
 
 /**
@@ -53,22 +53,22 @@ function renderHeader(rule) {
  * @returns {string} The document header.
  */
 function renderFooter(rule) {
-    const docsPath = path.dirname(path.resolve(docsRoot, `${rule.name}.md`));
-    const rulePath = path
-        .relative(docsPath, path.join(ruleRoot, `${rule.name}.js`))
-        .replace(/\\/gu, "/");
-    const testPath = path
-        .relative(docsPath, path.join(testRoot, `${rule.name}.js`))
-        .replace(/\\/gu, "/");
+  const docsPath = path.dirname(path.resolve(docsRoot, `${rule.name}.md`));
+  const rulePath = path
+    .relative(docsPath, path.join(ruleRoot, `${rule.name}.js`))
+    .replace(/\\/gu, "/");
+  const testPath = path
+    .relative(docsPath, path.join(testRoot, `${rule.name}.js`))
+    .replace(/\\/gu, "/");
 
-    return `\n\n## Implementation\n\n- [Rule source](${rulePath})\n- [Test source](${testPath})`;
+  return `\n\n## Implementation\n\n- [Rule source](${rulePath})\n- [Test source](${testPath})`;
 }
 
 for (const rule of rules) {
-    const filePath = path.resolve(docsRoot, `${rule.name}.md`);
-    const original = fs.readFileSync(filePath, "utf8");
-    const body = original.replace(headerPattern, "").replace(footerPattern, "");
-    const content = `${renderHeader(rule)}${body}${renderFooter(rule)}\n`;
+  const filePath = path.resolve(docsRoot, `${rule.name}.md`);
+  const original = fs.readFileSync(filePath, "utf8");
+  const body = original.replace(headerPattern, "").replace(footerPattern, "");
+  const content = `${renderHeader(rule)}${body}${renderFooter(rule)}\n`;
 
-    fs.writeFileSync(filePath, content);
+  fs.writeFileSync(filePath, content);
 }

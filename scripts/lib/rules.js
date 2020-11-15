@@ -25,32 +25,33 @@ const { pluginId } = require("./plugin-id");
  */
 
 /** @type {RuleInfo[]} */
-const rules = fs.readdirSync(rootDir)
-    .sort()
-    .map(filename => {
-        const filePath = path.join(rootDir, filename);
-        const name = filename.slice(0, -3);
-        const { meta } = require(filePath);
+const rules = fs
+  .readdirSync(rootDir)
+  .sort()
+  .map((filename) => {
+    const filePath = path.join(rootDir, filename);
+    const name = filename.slice(0, -3);
+    const { meta } = require(filePath);
 
-        return {
-            filePath,
-            id: `${pluginId}/${name}`,
-            name,
-            deprecated: Boolean(meta.deprecated),
-            fixable: Boolean(meta.fixable),
-            replacedBy: [],
-            ...meta.docs
-        };
-    });
+    return {
+      filePath,
+      id: `${pluginId}/${name}`,
+      name,
+      deprecated: Boolean(meta.deprecated),
+      fixable: Boolean(meta.fixable),
+      replacedBy: [],
+      ...meta.docs,
+    };
+  });
 
 /** @type {CategoryInfo[]} */
 const categories = [
-    "Possible Errors",
-    "Best Practices",
-    "Stylistic Issues"
-].map(id => ({
-    id,
-    rules: rules.filter(rule => rule.category === id && !rule.deprecated)
+  "Possible Errors",
+  "Best Practices",
+  "Stylistic Issues",
+].map((id) => ({
+  id,
+  rules: rules.filter((rule) => rule.category === id && !rule.deprecated),
 }));
 
 module.exports = { rules, categories };

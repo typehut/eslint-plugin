@@ -8,27 +8,34 @@ const ruleId = process.argv[2];
 
 // Require rule ID.
 if (!ruleId) {
-    console.error("Usage: npm run add-rule <RULE_ID>");
-    process.exitCode = 1;
-    return;
+  console.error("Usage: npm run add-rule <RULE_ID>");
+  process.exitCode = 1;
+  return;
 }
 
 const docPath = path.resolve(__dirname, "../docs/rules", `${ruleId}.md`);
 const rulePath = path.resolve(__dirname, "../lib/rules", `${ruleId}.js`);
 const testPath = path.resolve(__dirname, "../tests/lib/rules", `${ruleId}.js`);
-const docUrl = `${pkg.homepage.split("#")[0]}/blob/main/docs/rules/${ruleId}.md`;
+const docUrl = `${
+  pkg.homepage.split("#")[0]
+}/blob/main/docs/rules/${ruleId}.md`;
 
 // Overwrite check.
 for (const filePath of [docPath, rulePath, testPath]) {
-    if (fs.existsSync(filePath)) {
-        console.error("%o has existed already.", path.relative(process.cwd(), filePath));
-        process.exitCode = 1;
-        return;
-    }
+  if (fs.existsSync(filePath)) {
+    console.error(
+      "%o has existed already.",
+      path.relative(process.cwd(), filePath)
+    );
+    process.exitCode = 1;
+    return;
+  }
 }
 
 // Generate files.
-fs.writeFileSync(docPath, `# ${pluginId}/${ruleId}
+fs.writeFileSync(
+  docPath,
+  `# ${pluginId}/${ruleId}
 > (TODO: summary)
 
 (TODO: why is this rule useful?)
@@ -40,9 +47,12 @@ fs.writeFileSync(docPath, `# ${pluginId}/${ruleId}
 ## Options
 
 (TODO: what do options exist?)
-`);
+`
+);
 
-fs.writeFileSync(rulePath, `"use strict";
+fs.writeFileSync(
+  rulePath,
+  `"use strict";
 
 /**
  * @typedef {} RuleErrorId
@@ -100,9 +110,12 @@ module.exports = {
     meta,
     create
 };
-`);
+`
+);
 
-fs.writeFileSync(testPath, `"use strict";
+fs.writeFileSync(
+  testPath,
+  `"use strict";
 
 const ruleTester = require("../utils/rule-tester");
 const rule = require("../../../lib/rules/${ruleId}");
@@ -117,4 +130,5 @@ ruleTester().run("${ruleId}", rule, {
     valid: [],
     invalid: []
 });
-`);
+`
+);

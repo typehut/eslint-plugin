@@ -11,20 +11,24 @@ const errors = require("../utils/errors");
 const expectedErrors = errors(["enforceAnchorHasContent", "JSXOpeningElement"]);
 
 ruleTester().run("jsx-a11y-anchor-has-content", rule, {
-    valid: [
-        "<div />;",
-        "<a>Foo</a>",
-        "<a><Bar /></a>",
-        "<a>{foo}</a>",
-        "<a>{foo.bar}</a>",
-        '<a dangerouslySetInnerHTML={{ __html: "foo" }} />',
-        "<a children={children} />",
-        "<Trans components={[<a href=\"foo\" />]} />"
-    ],
-    invalid: [
-        { code: "<a />", errors: expectedErrors },
-        { code: "<a><Bar aria-hidden /></a>", errors: expectedErrors },
-        { code: "<a>{undefined}</a>", errors: expectedErrors },
-        { code: "<Trans components={[<a href=\"foo\" />]} />", options: [{ ignoreAttributeInner: false }], errors: expectedErrors }
-    ]
+  valid: [
+    "<div />;",
+    "<a>Foo</a>",
+    "<a><Bar /></a>",
+    "<a>{foo}</a>",
+    "<a>{foo.bar}</a>",
+    '<a dangerouslySetInnerHTML={{ __html: "foo" }} />',
+    "<a children={children} />",
+    '<Trans components={[<a href="foo" />]} />',
+  ],
+  invalid: [
+    { code: "<a />", errors: expectedErrors },
+    { code: "<a><Bar aria-hidden /></a>", errors: expectedErrors },
+    { code: "<a>{undefined}</a>", errors: expectedErrors },
+    {
+      code: '<Trans components={[<a href="foo" />]} />',
+      options: [{ ignoreAttributeInner: false }],
+      errors: expectedErrors,
+    },
+  ],
 });
