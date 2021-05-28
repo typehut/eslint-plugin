@@ -3,15 +3,6 @@
 > - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 > - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-> enforce consistent use of `function` declarations or expressions
->
-> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
-> - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
-
-> enforce consistent use of `function` declarations or expressions
->
-> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
-
 The built-in func-style rule do not enforce arrow function expressions. It is also impossible to force a different style only in the top-level context.
 
 This rule can have three styles of arrow, declaration, and expression in the top-level and below context!
