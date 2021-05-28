@@ -1,5 +1,7 @@
 # @typehut/func-style
+
 > enforce consistent use of `function` declarations or expressions
+>
 > - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 > - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
@@ -23,6 +25,7 @@ This rule has an object option for an exception:
 
 - `"topLevelStyle"` `arrow | declaration | expression` enforces function style in top-level context.
 - `"allowExportDefaultFunctionDeclaration"` true (default: `false`) allow declarations for the default export even if you are configuring an `arrow` or `expression`.
+- `"onlyTopLevel"` true (default: `false`) include only top-level functions.
 - `"disabledAutoFix"` true (default: `false`) disable autofix.
 
 ## Implementation

@@ -1,4 +1,5 @@
 # @typehut/group-exports
+
 > Reports when named exports are not grouped together in a single export declaration or when multiple assignments to CommonJS module.exports or exports object are present in a single file
 >
 > - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.

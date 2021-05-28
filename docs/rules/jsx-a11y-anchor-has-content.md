@@ -1,4 +1,5 @@
 # @typehut/jsx-a11y-anchor-has-content
+
 > Enforce that anchors have content and that the content is accessible to screen readers
 
 Accessible means that it is not hidden using the `aria-hidden` prop. Refer to the references to learn about why this is important.

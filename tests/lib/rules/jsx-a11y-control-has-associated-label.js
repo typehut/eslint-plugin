@@ -24,8 +24,7 @@ const alwaysValid = [
     options: [{ depth: 3, controlComponents: ["CustomControl"] }],
   },
   {
-    code:
-      '<CustomControl><span><span label="Save"></span></span></CustomControl>',
+    code: '<CustomControl><span><span label="Save"></span></span></CustomControl>',
     options: [
       {
         depth: 3,
@@ -43,8 +42,7 @@ const alwaysValid = [
     options: [{ depth: 3 }],
   },
   {
-    code:
-      "<button><span><span><span><span><span><span><span><span>Save</span></span></span></span></span></span></span></span></button>",
+    code: "<button><span><span><span><span><span><span><span><span>Save</span></span></span></span></span></span></span></span></button>",
     options: [{ depth: 9 }],
   },
   { code: '<button><img alt="Save" /></button>' },
@@ -244,8 +242,7 @@ const alwaysValid = [
   { code: '<input type="text" />' },
   { code: '<label>Foo <input type="text" /></label>' },
   {
-    code:
-      '<input name={field.name} id="foo" type="text" value={field.value} disabled={isDisabled} onChange={changeText(field.onChange, field.name)} onBlur={field.onBlur} />',
+    code: '<input name={field.name} id="foo" type="text" value={field.value} disabled={isDisabled} onChange={changeText(field.onChange, field.name)} onBlur={field.onBlur} />',
   },
   { code: '<input type="time" />' },
   { code: '<input type="url" />' },
