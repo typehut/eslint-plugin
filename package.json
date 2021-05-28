@@ -1,6 +1,6 @@
 {
   "name": "@typehut/eslint-plugin",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "This is a plugin that puts the ESLint rules I have wanted into one place.",
   "engines": {
     "node": ">=12"
