@@ -1,8 +1,8 @@
-# @croutonn/group-exports
+# @typehut/group-exports
 
 > Reports when named exports are not grouped together in a single export declaration or when multiple assignments to CommonJS module.exports or exports object are present in a single file
 >
-> - ⭐️ This rule is included in `plugin:@croutonn/recommended` preset.
+> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 > - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
 **Rationale:** An `export` declaration or `module.exports` assignment can appear anywhere in the code. By requiring a single export declaration all your exports will remain at one place, making it easier to see what exports a module provides.

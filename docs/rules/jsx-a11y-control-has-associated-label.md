@@ -1,4 +1,4 @@
-# @croutonn/jsx-a11y-control-has-associated-label
+# @typehut/jsx-a11y-control-has-associated-label
 
 > Enforce that a control (an interactive element) has a text label
 

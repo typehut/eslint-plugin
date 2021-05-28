@@ -1,8 +1,8 @@
-# @croutonn/typescript-react-require-props-suffix
+# @typehut/typescript-react-require-props-suffix
 
 > require that prop interface names be suffixed with `Props`
 >
-> - ⭐️ This rule is included in `plugin:@croutonn/recommended` preset.
+> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 
 The suffix `Props` makes the code easier to read by making it clear that it is of type props for React components.
 

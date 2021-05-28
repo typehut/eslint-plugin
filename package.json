@@ -1,5 +1,5 @@
 {
-  "name": "@croutonn/eslint-plugin",
+  "name": "@typehut/eslint-plugin",
   "version": "0.2.9",
   "description": "This is a plugin that puts the ESLint rules I have wanted into one place.",
   "engines": {
@@ -45,19 +45,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/croutonn/eslint-plugin.git"
+    "url": "git+https://github.com/typehut/eslint-plugin.git"
   },
   "keywords": [
     "eslint",
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "@croutonn",
+  "author": "@typehut",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/croutonn/eslint-plugin/issues"
+    "url": "https://github.com/typehut/eslint-plugin/issues"
   },
-  "homepage": "https://github.com/croutonn/eslint-plugin#readme",
+  "homepage": "https://github.com/typehut/eslint-plugin#readme",
   "publishConfig": {
     "access": "public"
   }
