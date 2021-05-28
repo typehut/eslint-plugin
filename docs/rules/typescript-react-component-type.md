@@ -3,11 +3,6 @@
 > - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 > - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
 
-> enforce `FC` and `FunctionComponent` types to one or the other
->
-> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
-> - ✒️ The `--fix` option on the [command line](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) can automatically fix some of the problems reported by this rule.
-
 By enforcing or not suppressing the React component type, a sense of unity is created.
 You can also enforce `React.FunctionComponent` if "Do not omit" is recommended as a style guide for naming.
 
