@@ -3,11 +3,13 @@
   "version": "0.2.9",
   "description": "This is a plugin that puts the ESLint rules I have wanted into one place.",
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=12"
   },
   "main": "lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "package.json",
+    "LICENSE"
   ],
   "scripts": {
     "add-rule": "node scripts/add-rule",
@@ -59,6 +61,7 @@
   },
   "homepage": "https://github.com/typehut/eslint-plugin#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   }
 }
