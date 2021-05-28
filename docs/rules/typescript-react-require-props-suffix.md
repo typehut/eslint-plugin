@@ -2,10 +2,6 @@
 > require that prop interface names be suffixed with `Props`
 > - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 
-> require that prop interface names be suffixed with `Props`
->
-> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
-
 The suffix `Props` makes the code easier to read by making it clear that it is of type props for React components.
 
 **Note: This rule works only with function components, ignoring the `SFC` and `StatelessComponent` types. .**
