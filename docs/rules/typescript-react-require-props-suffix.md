@@ -1,4 +1,6 @@
 # @typehut/typescript-react-require-props-suffix
+> require that prop interface names be suffixed with `Props`
+> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 
 > require that prop interface names be suffixed with `Props`
 >

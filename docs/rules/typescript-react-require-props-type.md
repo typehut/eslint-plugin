@@ -1,4 +1,6 @@
 # @typehut/typescript-react-require-props-type
+> require an props type to be provided to a React component
+> - ⭐️ This rule is included in `plugin:@typehut/recommended` preset.
 
 > require an props type to be provided to a React component
 >
